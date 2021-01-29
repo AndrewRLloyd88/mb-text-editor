@@ -2,3 +2,7 @@ h1 {
   color: white;
   background-color: black;
 }
+
+.editor {
+  border: 1px solid black;
+}
