@@ -6,7 +6,7 @@ import './styles.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App name="Jane" />
+    <App name="Andrew" />
   </React.StrictMode>,
   document.getElementById('app')
 );
