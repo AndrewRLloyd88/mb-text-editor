@@ -12,12 +12,17 @@ const App = (props: Props) => {
 
   const onChange = () => {
     if (content.current) {
+      console.log(content.current);
+      console.log(content.current);
       setCurrentHTML(content.current.innerHTML);
       console.log(currentHTML);
     }
   };
 
   const handleClick = () => {
+    //it would make sense to pass a type in and a switch case
+
+    //get the current selection
     let selection = window.getSelection()?.anchorNode?.textContent;
     const startIndex = window.getSelection()?.anchorOffset;
     const endIndex = window.getSelection()?.focusOffset;
@@ -25,8 +30,9 @@ const App = (props: Props) => {
     if (startIndex && endIndex) {
       selection = selection?.substr(startIndex, endIndex - startIndex);
       console.log(selection);
-      console.log(props.name);
     }
+
+    //do stuff in a switch case here
   };
 
   useEffect(() => {
@@ -43,14 +49,16 @@ const App = (props: Props) => {
         </Button>
       </div>
       <div
+        ref={content}
         className="editor"
         contentEditable="true"
         spellCheck="true"
-        onChange={onChange}
+        onInput={onChange}
         suppressContentEditableWarning={true}
       >
-        <p ref={content}>Edit this content to add your own quote</p>
+        <p>Edit this content to add your own quote</p>
       </div>
+      <div>{currentHTML}</div>
     </>
   );
 };
