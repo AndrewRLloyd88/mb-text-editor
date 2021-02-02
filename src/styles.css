@@ -27,3 +27,7 @@ button {
 #Underline {
   text-decoration: underline;
 }
+
+svg {
+  pointer-events: none;
+}

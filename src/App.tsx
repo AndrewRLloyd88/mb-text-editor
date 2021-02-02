@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import Toolbar from './Toolbar';
 
 type Props = {
@@ -8,18 +8,12 @@ type Props = {
 const App = (props: Props) => {
   const content = useRef<HTMLDivElement | null>(null);
   const [currentHTML, setCurrentHTML] = useState('');
-  const [userSelection, setSelection] = useState('');
-  const renderToString = () => {};
 
   const onChange = () => {
     if (content.current) {
       setCurrentHTML(content.current.innerHTML);
     }
   };
-
-  useEffect(() => {
-    const el = content.current?.innerHTML;
-  }, [userSelection]);
 
   return (
     <>
