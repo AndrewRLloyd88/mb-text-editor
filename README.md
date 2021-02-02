@@ -12,9 +12,9 @@ As a user:
 
 ## Toolbar
 
-- I can change the font of the text
+- <del>I can change the font of the text
 - I can change the font size of the text
-- I can change the text color
+- <del>I can change the text color
 - <del>I can bold, italicize or underline
 - <del>I can change the left/right/center alignment of the text
 - I can add hyperlinks to text

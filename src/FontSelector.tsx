@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 export default function FontSelector() {
   const changeFont = (e) => {
-    console.log(e.target.value);
     document.execCommand('fontName', false, e.target.value);
     console.log('font');
   };

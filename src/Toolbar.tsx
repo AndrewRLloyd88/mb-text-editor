@@ -8,8 +8,8 @@ import {
   faAlignLeft,
   faAlignRight,
 } from '@fortawesome/free-solid-svg-icons';
-
-// library.add(faAlignCenter, faAlignLeft, faAlignRight);
+import ColorSelector from './ColorSelector';
+import FontSizeSelector from './FontSizeSelector';
 
 export default function Toolbar() {
   return (
@@ -18,10 +18,12 @@ export default function Toolbar() {
       <Button id="Italic"></Button>
       <Button id="Underline"></Button>
       <FontSelector />
+      <FontSizeSelector />
       <Button id="Justify-Left" icon={faAlignLeft}></Button>
       <Button id="Justify-Center" icon={faAlignCenter}></Button>
 
       <Button id="Justify-Right" icon={faAlignRight}></Button>
+      <ColorSelector />
     </div>
   );
 }
