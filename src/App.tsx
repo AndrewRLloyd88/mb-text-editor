@@ -13,22 +13,17 @@ const App = (props: Props) => {
 
   const onChange = () => {
     if (content.current) {
-      console.log(content.current);
-      console.log(content.current);
       setCurrentHTML(content.current.innerHTML);
-      console.log(currentHTML);
     }
   };
 
   useEffect(() => {
     const el = content.current?.innerHTML;
-    console.log(el);
-    console.log(userSelection);
   }, [userSelection]);
 
   return (
     <>
-      <h1>Wysiwyg Text Editor</h1>
+      <h1>MB-WYSIWYG Text Editor</h1>
       <Toolbar />
       <div
         ref={content}
@@ -38,7 +33,7 @@ const App = (props: Props) => {
         onInput={onChange}
         suppressContentEditableWarning={true}
       >
-        <p>Edit this content to add your own quote</p>
+        <p>Start typing here to create your own document.</p>
       </div>
       <div>{currentHTML}</div>
     </>

@@ -1,21 +1,24 @@
 import React from 'react';
 import UseToolbarMode from './useToolbarMode';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 type Props = {
   id: string;
+  icon?: IconDefinition;
 };
 
 export default function Button(props: Props) {
+  console.log(props);
   return (
     <div>
       <button
         id={props.id}
         onClick={(e) => {
-          console.log('clicked');
           UseToolbarMode((e.target as HTMLElement).id);
         }}
       >
-        {props.id[0]}
+        {props.icon ? <FontAwesomeIcon icon={props.icon} /> : props.id[0]}
       </button>
     </div>
   );
