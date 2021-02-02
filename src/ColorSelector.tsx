@@ -5,6 +5,7 @@ export default function ColorSelector() {
 
   const handleChange = (e) => {
     setColor(e.target.value);
+    changeColor();
   };
 
   const changeColor = () => {
@@ -19,7 +20,6 @@ export default function ColorSelector() {
         name="favcolor"
         value={color}
         onChange={(e) => handleChange(e)}
-        onBlur={changeColor}
       />
     </div>
   );
