@@ -7,9 +7,11 @@ import {
   faAlignCenter,
   faAlignLeft,
   faAlignRight,
+  faLink,
 } from '@fortawesome/free-solid-svg-icons';
 import ColorSelector from './ColorSelector';
 import FontSizeSelector from './FontSizeSelector';
+import LinkButton from './LinkButton';
 
 export default function Toolbar() {
   return (
@@ -24,6 +26,7 @@ export default function Toolbar() {
 
       <Button id="Justify-Right" icon={faAlignRight}></Button>
       <ColorSelector />
+      <LinkButton id="Hyperlink" icon={faLink} />
     </div>
   );
 }

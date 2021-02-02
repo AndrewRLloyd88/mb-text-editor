@@ -31,3 +31,7 @@ button {
 svg {
   pointer-events: none;
 }
+
+a {
+  cursor: pointer;
+}

@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function Button(props: Props) {
-  console.log(props);
   return (
     <div>
       <button

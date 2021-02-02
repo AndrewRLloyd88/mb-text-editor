@@ -9,6 +9,32 @@ const App = (props: Props) => {
   const content = useRef<HTMLDivElement | null>(null);
   const [currentHTML, setCurrentHTML] = useState('');
 
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      if (event.keyCode === 17) {
+        if (content.current) {
+          console.log(content);
+          content.current.contentEditable = 'false';
+        }
+      }
+    },
+    false
+  );
+
+  document.addEventListener(
+    'keyup',
+    (event) => {
+      if (event.keyCode === 17) {
+        if (content.current) {
+          // when ctrl is released
+          content.current.contentEditable = 'true';
+        }
+      }
+    },
+    false
+  );
+
   const onChange = () => {
     if (content.current) {
       setCurrentHTML(content.current.innerHTML);
