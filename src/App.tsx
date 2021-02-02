@@ -12,7 +12,7 @@ const App = (props: Props) => {
   document.addEventListener(
     'keydown',
     (event) => {
-      if (event.keyCode === 17) {
+      if (event.key === 'Control') {
         if (content.current) {
           console.log(content);
           content.current.contentEditable = 'false';
@@ -25,7 +25,7 @@ const App = (props: Props) => {
   document.addEventListener(
     'keyup',
     (event) => {
-      if (event.keyCode === 17) {
+      if (event.key === 'Control') {
         if (content.current) {
           // when ctrl is released
           content.current.contentEditable = 'true';
