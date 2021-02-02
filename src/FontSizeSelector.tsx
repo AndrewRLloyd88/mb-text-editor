@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import FontSizeSelector from './FontSizeSelector';
 
 export default function FontSizeSelector() {
   const [fontSize, setFontSize] = useState(12);
