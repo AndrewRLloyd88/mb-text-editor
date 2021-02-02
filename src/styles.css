@@ -6,3 +6,24 @@ h1 {
 .editor {
   border: 1px solid black;
 }
+
+.toolbar {
+  display: flex;
+}
+
+button {
+  width: 30px;
+  height: 30px;
+}
+
+#Bold {
+  font-weight: bolder;
+}
+
+#Italic {
+  font-style: italic;
+}
+
+#Underline {
+  text-decoration: underline;
+}

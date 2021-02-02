@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
+import Toolbar from './Toolbar';
 
 type Props = {
   name: string;
@@ -8,6 +8,7 @@ type Props = {
 const App = (props: Props) => {
   const content = useRef<HTMLDivElement | null>(null);
   const [currentHTML, setCurrentHTML] = useState('');
+  const [userSelection, setSelection] = useState('');
   const renderToString = () => {};
 
   const onChange = () => {
@@ -19,35 +20,16 @@ const App = (props: Props) => {
     }
   };
 
-  const handleClick = () => {
-    //it would make sense to pass a type in and a switch case
-
-    //get the current selection
-    let selection = window.getSelection()?.anchorNode?.textContent;
-    const startIndex = window.getSelection()?.anchorOffset;
-    const endIndex = window.getSelection()?.focusOffset;
-    //typescript is preventing an error here??
-    if (startIndex && endIndex) {
-      selection = selection?.substr(startIndex, endIndex - startIndex);
-      console.log(selection);
-    }
-
-    //do stuff in a switch case here
-  };
-
   useEffect(() => {
     const el = content.current?.innerHTML;
     console.log(el);
-  }, []);
+    console.log(userSelection);
+  }, [userSelection]);
 
   return (
     <>
       <h1>Wysiwyg Text Editor</h1>
-      <div className="toolbar">
-        <Button onClick={handleClick} variant="contained">
-          <b>B</b>
-        </Button>
-      </div>
+      <Toolbar />
       <div
         ref={content}
         className="editor"
