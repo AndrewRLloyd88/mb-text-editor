@@ -1,32 +1,20 @@
-# mb-text-editor
+# MB-WYSIWYG Text Editor
 
-Empty project.
+# Goals
 
-## Building and running on localhost
+## Editor
 
-First install dependencies:
+As a user:
 
-```sh
-npm install
-```
+- <del>I can type, edit and clear the text in the editor
+- <del>the editor will show me where I have made a spelling mistake
+- <del>the editor will show me where I have made a grammar mistake (stretch)
 
-To run in hot module reloading mode:
+## Toolbar
 
-```sh
-npm start
-```
-
-To create a production build:
-
-```sh
-npm run build-prod
-```
-
-## Running
-
-Open the file `dist/index.html` in your browser
-
-## Credits
-
-Made with [createapp.dev](https://createapp.dev/)
-
+- I can change the font of the text
+- I can change the font size of the text
+- I can change the text color
+- <del>I can bold, italicize or underline
+- I can change the left/right/center alignment of the text
+- I can add hyperlinks to text
