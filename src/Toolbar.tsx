@@ -18,7 +18,7 @@ export default function Toolbar() {
       <Button id="Italic"></Button>
       <Button id="Underline"></Button>
       <FontSelector />
-      <Button id="Justify-left" icon={faAlignLeft}></Button>
+      <Button id="Justify-Left" icon={faAlignLeft}></Button>
       <Button id="Justify-Center" icon={faAlignCenter}></Button>
 
       <Button id="Justify-Right" icon={faAlignRight}></Button>

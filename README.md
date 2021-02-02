@@ -16,5 +16,5 @@ As a user:
 - I can change the font size of the text
 - I can change the text color
 - <del>I can bold, italicize or underline
-- I can change the left/right/center alignment of the text
+- <del>I can change the left/right/center alignment of the text
 - I can add hyperlinks to text

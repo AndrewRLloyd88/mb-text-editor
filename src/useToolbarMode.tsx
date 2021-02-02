@@ -12,6 +12,18 @@ function UseToolbarMode(event: string) {
     case 'Underline':
       document.execCommand('underline');
       break;
+
+    case 'Justify-Left':
+      document.execCommand('justifyleft');
+      break;
+
+    case 'Justify-Right':
+      document.execCommand('justifyright');
+      break;
+
+    case 'Justify-Center':
+      document.execCommand('justifycenter');
+      break;
     default:
       break;
   }
