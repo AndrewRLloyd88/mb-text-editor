@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Toolbar from './Toolbar';
 
 type Props = {
@@ -8,6 +8,8 @@ type Props = {
 const App = (props: Props) => {
   const content = useRef<HTMLDivElement | null>(null);
   const [currentHTML, setCurrentHTML] = useState('');
+  const [docTitle, setDocTitle] = useState('untitled-document');
+  const [savedAt, setSavedAt] = useState<String>();
 
   document.addEventListener(
     'keydown',
@@ -41,9 +43,49 @@ const App = (props: Props) => {
     }
   };
 
+  //Save Function
+  const saveDoc = () => {
+    console.log(new Date().toString());
+    setSavedAt(new Date().toString());
+    localStorage[docTitle] = currentHTML;
+  };
+
+  const loadDocs = () => {
+    const docs = Object.keys(localStorage);
+    console.log(docs);
+  };
+
+  useEffect(() => {
+    if (content.current) {
+      setCurrentHTML(content.current.innerHTML);
+    }
+  }, [content.current]);
+
   return (
     <>
       <h1>MB-WYSIWYG Text Editor</h1>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          saveDoc();
+        }}
+      >
+        <input
+          value={docTitle}
+          onChange={(e) => {
+            setDocTitle(e.target.value);
+          }}
+          placeholder="untitled-document"
+          required={true}
+        ></input>
+        <button>Save</button>
+        <p>
+          {savedAt === undefined
+            ? 'Unsaved'
+            : `Document last saved at: ${savedAt}`}
+        </p>
+      </form>
+      <button onClick={loadDocs}>Load</button>
       <Toolbar />
       <div
         ref={content}
