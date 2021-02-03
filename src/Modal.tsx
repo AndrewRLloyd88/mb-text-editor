@@ -1,21 +1,48 @@
 import React from 'react';
 
-export default function Modal() {
+interface Props {
+  show: boolean;
+  userDocs: String[];
+  hide: () => void;
+  changeDocs: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
+export default function Modal(props: Props) {
+  const files = props.userDocs.map((doc, idx) => {
+    return (
+      <tr>
+        <td key={idx}>{doc}</td>
+        <td key={idx + 100}>
+          <button
+            onClick={(e) => {
+              props.changeDocs(e);
+            }}
+            id={`${doc}`}
+          >
+            Load
+          </button>
+        </td>
+      </tr>
+    );
+  });
   return (
-    <div className="modal" hidden={true}>
+    <div className="modal" hidden={props.show}>
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">FileName</th>
-            {/* <th scope="col">Long URL</th>
-            <th scope="col">Date Created</th>
-            <th scope="col">TinyURL Uses</th>
-            <th scope="col">TinyURL Views</th>
-            <th scope="col">Edit</th> */}
-            <th scope="col">Delete</th>
+            <th scope="col">Filename</th>
+            <th scope="col"></th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>{files}</tbody>
+        <tbody>
+          <tr>
+            <td></td>
+            <td>
+              <button onClick={props.hide}>Back</button>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );
