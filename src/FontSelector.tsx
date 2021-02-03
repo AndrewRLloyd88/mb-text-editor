@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function FontSelector() {
-  const changeFont = (e) => {
-    document.execCommand('fontName', false, e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    changeFont(value);
+  };
+
+  const changeFont = (e: string) => {
+    document.execCommand('fontName', false, e);
     console.log('font');
   };
 
   return (
-    <select id="input-font" className="input" onChange={(e) => changeFont(e)}>
+    <select id="input-font" className="input" onChange={(e) => handleChange(e)}>
       <option value="Times New Roman" defaultValue="Times New Roman">
         Times New Roman
       </option>

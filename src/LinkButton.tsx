@@ -15,7 +15,7 @@ type Props = {
 export default function LinkButton(props: Props) {
   const [open, setOpen] = useState(false);
   const [url, setURL] = useState('');
-  const [selection, setSelection] = useState({});
+  const [selection, setSelection] = useState({} as Range);
   const [selectedText, setSelectedText] = useState('');
 
   const checkForSelection = () => {
@@ -26,8 +26,8 @@ export default function LinkButton(props: Props) {
     if (selection) {
       if (window.getSelection) {
         let sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(selection);
+        sel?.removeAllRanges();
+        sel?.addRange(selection);
       }
     }
     setOpen(false);
@@ -40,10 +40,10 @@ export default function LinkButton(props: Props) {
 
   const handleClickOpen = () => {
     const select = window.getSelection();
-    const stext = window.getSelection().toString();
-    const coords = select.getRangeAt(0);
-    setSelection(coords);
-    setSelectedText(stext);
+    const stext = window?.getSelection()?.toString();
+    const coords = select?.getRangeAt(0);
+    setSelection(coords as Range);
+    setSelectedText(stext as string);
     setOpen(true);
   };
 
