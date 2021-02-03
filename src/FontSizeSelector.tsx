@@ -4,11 +4,12 @@ export default function FontSizeSelector() {
   const [fontSize, setFontSize] = useState(12);
 
   const changeSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (window.getSelection.toString().length === 0) {
+    let range = window.getSelection()?.getRangeAt(0);
+    const oldContent = document.createTextNode((range || {}).toString());
+    console.log(oldContent);
+    if (oldContent.length === 0) {
       return;
     }
-    let range = window.getSelection()?.getRangeAt(0);
-    const oldContent = document.createTextNode((range || '').toString());
     const newElement = document.createElement('span');
     newElement.style.fontSize = `${e.target.value}px`;
     newElement.append(oldContent);
