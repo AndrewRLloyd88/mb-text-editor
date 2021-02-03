@@ -61,8 +61,8 @@ const App = (props: Props) => {
   };
 
   //changes docs based on load button in modal
-  const changeDocs = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const doc = e.currentTarget.id;
+  const changeDocs = (docName: string) => {
+    const doc = docName;
     const html: string = localStorage.getItem(doc)!;
     console.log(html);
     setCurrentHTML(html);
@@ -70,7 +70,9 @@ const App = (props: Props) => {
     if (content.current) {
       content.current.innerHTML = html;
     }
-    setShow(!show);
+    if (show === false) {
+      setShow(!show);
+    }
   };
 
   //used for the back button in the modal
@@ -79,6 +81,13 @@ const App = (props: Props) => {
   };
 
   useEffect(() => {
+    //does untitiled-document exist in localstorage?
+    if (
+      localStorage.getItem('untitled-document') &&
+      docTitle === 'untitled-document'
+    ) {
+      changeDocs('untitled-document');
+    }
     const docs = Object.keys(localStorage);
     setUserDocs([...docs]);
     console.log(userDocs);
@@ -94,7 +103,10 @@ const App = (props: Props) => {
         show={show}
         userDocs={userDocs}
         hide={setHidden}
-        changeDocs={(e) => changeDocs(e)}
+        changeDocs={(e) => {
+          const docName: string = e.target.id;
+          changeDocs(docName);
+        }}
       />
       <div className="file-mgr">
         <form
@@ -112,14 +124,14 @@ const App = (props: Props) => {
             required={true}
           ></input>
           <button>Save</button>
-          <p>
-            {savedAt === undefined
-              ? 'Unsaved'
-              : `Document last saved at: ${savedAt}`}
-          </p>
         </form>
         <button onClick={loadDocs}>Load</button>
       </div>
+      <p>
+        {savedAt === undefined
+          ? 'Unsaved'
+          : `Document last saved at: ${savedAt}`}
+      </p>
       <Toolbar />
       <div
         ref={content}
