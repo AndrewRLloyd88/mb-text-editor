@@ -1,15 +1,18 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Toolbar from './Toolbar';
+import Modal from './Modal';
 
 type Props = {
   name: string;
 };
 
 const App = (props: Props) => {
-  const content = useRef<HTMLDivElement | null>(null);
+  const content = useRef<HTMLDivElement>(null);
   const [currentHTML, setCurrentHTML] = useState('');
   const [docTitle, setDocTitle] = useState('untitled-document');
   const [savedAt, setSavedAt] = useState<String>();
+  const [userDocs, setUserDocs] = useState<String[]>([]);
+  const [show, setShow] = useState(false);
 
   document.addEventListener(
     'keydown',
@@ -55,15 +58,23 @@ const App = (props: Props) => {
     console.log(docs);
   };
 
+  const handleLoadChange = () => {
+    console.log('loading');
+  };
+
   useEffect(() => {
+    const docs = Object.keys(localStorage);
+    console.log(docs);
+    setUserDocs([...docs]);
     if (content.current) {
       setCurrentHTML(content.current.innerHTML);
     }
-  }, [content.current]);
+  }, []);
 
   return (
     <>
       <h1>MB-WYSIWYG Text Editor</h1>
+      <Modal />
       <form
         onSubmit={(e) => {
           e.preventDefault();
