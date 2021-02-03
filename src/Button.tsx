@@ -3,10 +3,10 @@ import UseToolbarMode from './useToolbarMode';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
-type Props = {
+interface Props {
   id: string;
   icon?: IconDefinition;
-};
+}
 
 export default function Button(props: Props) {
   return (

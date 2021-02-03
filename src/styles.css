@@ -44,3 +44,7 @@ a {
   background-color: white;
   z-index: 1000;
 }
+
+.file-mgr {
+  display: flex;
+}

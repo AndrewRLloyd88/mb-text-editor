@@ -4,7 +4,7 @@ export default function FontSizeSelector() {
   const [fontSize, setFontSize] = useState(12);
 
   const changeSize = (e) => {
-    let range = window.getSelection().getRangeAt(0);
+    let range = window.getSelection()?.getRangeAt(0);
     const oldContent = document.createTextNode(range.toString());
     const newElement = document.createElement('span');
     newElement.style.fontSize = `${e.target.value}px`;

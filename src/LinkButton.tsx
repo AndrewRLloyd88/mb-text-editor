@@ -7,10 +7,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 
-type Props = {
+interface Props {
   id: string;
   icon?: IconDefinition;
-};
+}
 
 export default function LinkButton(props: Props) {
   const [open, setOpen] = useState(false);

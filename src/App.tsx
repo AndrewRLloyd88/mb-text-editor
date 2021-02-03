@@ -2,9 +2,9 @@ import React, { useRef, useState, useEffect } from 'react';
 import Toolbar from './Toolbar';
 import Modal from './Modal';
 
-type Props = {
+interface Props {
   name: string;
-};
+}
 
 const App = (props: Props) => {
   const content = useRef<HTMLDivElement>(null);
@@ -96,28 +96,30 @@ const App = (props: Props) => {
         hide={setHidden}
         changeDocs={(e) => changeDocs(e)}
       />
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          saveDoc();
-        }}
-      >
-        <input
-          value={docTitle}
-          onChange={(e) => {
-            setDocTitle(e.target.value);
+      <div className="file-mgr">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            saveDoc();
           }}
-          placeholder="untitled-document"
-          required={true}
-        ></input>
-        <button>Save</button>
-        <p>
-          {savedAt === undefined
-            ? 'Unsaved'
-            : `Document last saved at: ${savedAt}`}
-        </p>
-      </form>
-      <button onClick={loadDocs}>Load</button>
+        >
+          <input
+            value={docTitle}
+            onChange={(e) => {
+              setDocTitle(e.target.value);
+            }}
+            placeholder="untitled-document"
+            required={true}
+          ></input>
+          <button>Save</button>
+          <p>
+            {savedAt === undefined
+              ? 'Unsaved'
+              : `Document last saved at: ${savedAt}`}
+          </p>
+        </form>
+        <button onClick={loadDocs}>Load</button>
+      </div>
       <Toolbar />
       <div
         ref={content}
