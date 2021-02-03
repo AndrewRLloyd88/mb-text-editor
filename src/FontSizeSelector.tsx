@@ -5,6 +5,8 @@ export default function FontSizeSelector() {
 
   const changeSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
     let range = window.getSelection()?.getRangeAt(0);
+    var colour = document.queryCommandValue('ForeColor');
+    console.log(colour);
     const oldContent = document.createTextNode((range || {}).toString());
     console.log(oldContent);
     if (oldContent.length === 0) {
@@ -12,7 +14,10 @@ export default function FontSizeSelector() {
     }
     const newElement = document.createElement('span');
     newElement.style.fontSize = `${e.target.value}px`;
+    newElement.style.color = colour;
+    newElement.style.textDecorationColor = colour;
     newElement.append(oldContent);
+    console.log(range);
     range?.deleteContents();
     range?.insertNode(newElement);
   };
