@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function FontSizeSelector() {
   const [fontSize, setFontSize] = useState(12);
 
-  const changeSize = (e) => {
+  const changeSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (window.getSelection.toString().length === 0) {
       return;
     }
