@@ -1,5 +1,9 @@
 # MB-WYSIWYG Text Editor
 
+The app is live on [netlify](https://mb-wysiwyg-text-editor.netlify.app/)
+
+<hr>
+
 # Goals
 
 ## Editor
@@ -25,11 +29,11 @@ As a user:
 
 As a user:
 
-- I can give each document a title
-- I can create new documents
-- I can select a document to edit from my documents
-  whenever a change is made, it is saved
-- I can see what time, or how long ago, the last save occurred
+- <del>I can give each document a title
+- <del>I can create new documents
+- <del>I can select a document to edit from my documents
+- whenever a change is made, it is saved
+- <del>I can see what time, or how long ago, the last save occurred
 - (Stretch) my documents are accessable any device once I log in
 
 <b>UX Considerations</b>
