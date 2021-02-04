@@ -25,6 +25,8 @@ const App = (props: Props) => {
   const [showSpinner, setShowSpinner] = useState(true);
   const [savedOK, setSavedOK] = useState(false);
   const [showHTML, setShowHTML] = useState(true);
+  const body = document.querySelector('body');
+  const container = document.querySelector('.container');
 
   document.addEventListener(
     'keydown',
@@ -94,6 +96,8 @@ const App = (props: Props) => {
 
   //Gets Users Docs from localstorage
   const loadDocs = () => {
+    body?.classList.add('noscroll');
+    container?.classList.add('hide');
     const docs = Object.keys(localStorage);
     setUserDocs(docs);
     setShow(!show);
@@ -101,6 +105,8 @@ const App = (props: Props) => {
 
   //changes docs based on load button in modal
   const changeDocs = (docName: string) => {
+    body?.classList.remove('noscroll');
+    container?.classList.remove('hide');
     const doc = docName;
     const html: string = localStorage.getItem(doc)!;
     console.log(html);
@@ -116,6 +122,8 @@ const App = (props: Props) => {
 
   //used for the back button in the modal
   const setHidden = () => {
+    body?.classList.remove('noscroll');
+    container?.classList.remove('hide');
     setShow(!show);
   };
 
@@ -159,7 +167,7 @@ const App = (props: Props) => {
   return (
     <>
       <h1>MB-WYSIWYG Text Editor</h1>
-      <div className="container">
+      <div className="modalcontainer">
         <Modal
           show={show}
           userDocs={userDocs}

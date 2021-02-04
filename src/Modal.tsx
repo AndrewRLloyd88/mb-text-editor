@@ -2,6 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
+
 interface Props {
   show: boolean;
   userDocs: String[];
@@ -15,15 +17,17 @@ export default function Modal(props: Props) {
       <tr>
         <td key={idx}>{doc}</td>
         <td key={idx + 100}>
-          <button
-            className="loadbutton"
-            onClick={(e) => {
-              props.changeDocs(e);
-            }}
-            id={`${doc}`}
-          >
-            Load
-          </button>
+          <Tooltip title={`Load ${doc} `}>
+            <button
+              className="loadbutton"
+              onClick={(e) => {
+                props.changeDocs(e);
+              }}
+              id={`${doc}`}
+            >
+              Load
+            </button>
+          </Tooltip>
         </td>
       </tr>
     );
@@ -40,7 +44,11 @@ export default function Modal(props: Props) {
         </thead>
         <tbody>{files}</tbody>
       </table>
-      <button onClick={props.hide}>Back</button>
+      <Tooltip title="Go back to editor">
+        <button onClick={props.hide}>
+          <FontAwesomeIcon icon={faLongArrowAltLeft} />
+        </button>
+      </Tooltip>
     </div>
   );
 }
