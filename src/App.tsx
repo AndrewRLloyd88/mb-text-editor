@@ -136,8 +136,10 @@ const App = (props: Props) => {
         show={show}
         userDocs={userDocs}
         hide={setHidden}
-        changeDocs={(e) => {
-          const docName: string = e.target.id;
+        changeDocs={(
+          e: React.SyntheticEvent<HTMLButtonElement, MouseEvent>
+        ) => {
+          const docName: string = e.currentTarget.id;
           changeDocs(docName);
         }}
       />
