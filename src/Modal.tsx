@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tooltip from '@material-ui/core/Tooltip';
 
 interface Props {
   show: boolean;
@@ -14,6 +16,7 @@ export default function Modal(props: Props) {
         <td key={idx}>{doc}</td>
         <td key={idx + 100}>
           <button
+            className="loadbutton"
             onClick={(e) => {
               props.changeDocs(e);
             }}
@@ -27,23 +30,17 @@ export default function Modal(props: Props) {
   });
   return (
     <div className="modal" hidden={props.show}>
+      <button onClick={props.hide}>Back</button>
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">Filename</th>
+            <th scope="col">Load a file</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>{files}</tbody>
-        <tbody>
-          <tr>
-            <td></td>
-            <td>
-              <button onClick={props.hide}>Back</button>
-            </td>
-          </tr>
-        </tbody>
       </table>
+      <button onClick={props.hide}>Back</button>
     </div>
   );
 }

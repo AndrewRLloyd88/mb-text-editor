@@ -2,11 +2,13 @@ import React, { useRef, useState, useEffect } from 'react';
 import Toolbar from './Toolbar';
 import Modal from './Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import {
   faCircleNotch,
   faSave,
   faFolderOpen,
+  faFile,
 } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
@@ -53,6 +55,31 @@ const App = (props: Props) => {
   const onChange = () => {
     if (content.current) {
       setCurrentHTML(content.current.innerHTML);
+    }
+  };
+
+  const createNewDoc = () => {
+    if (localStorage.getItem('untitled-document')) {
+      let docCount = 0;
+      //check to see how many keys have untitled-document in local storage
+      console.log('true');
+      let docNames = Object.keys(localStorage);
+      console.log(docNames);
+      //increment that count by 1
+      const freq = docNames.filter((doc) => {
+        return doc.indexOf('untitled-document') === 0;
+      });
+      docCount = freq.length + 1;
+      console.log(docCount);
+      const doc = 'untitled-document' + 0 + docCount;
+      console.log(doc);
+      const html: string =
+        '<p>Start typing here to create your own document.</p>';
+      setCurrentHTML(html);
+      setDocTitle(doc);
+      if (content.current) {
+        content.current.innerHTML = html;
+      }
     }
   };
 
@@ -132,68 +159,83 @@ const App = (props: Props) => {
   return (
     <>
       <h1>MB-WYSIWYG Text Editor</h1>
-      <Modal
-        show={show}
-        userDocs={userDocs}
-        hide={setHidden}
-        changeDocs={(
-          e: React.SyntheticEvent<HTMLButtonElement, MouseEvent>
-        ) => {
-          const docName: string = e.currentTarget.id;
-          changeDocs(docName);
-        }}
-      />
-      <div className="file-mgr">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            saveDoc();
+      <div className="container">
+        <Modal
+          show={show}
+          userDocs={userDocs}
+          hide={setHidden}
+          changeDocs={(
+            e: React.SyntheticEvent<HTMLButtonElement, MouseEvent>
+          ) => {
+            const docName: string = e.currentTarget.id;
+            changeDocs(docName);
           }}
-        >
-          <input
-            value={docTitle}
-            onChange={(e) => {
-              setDocTitle(e.target.value);
+        />
+      </div>
+      <div className="container">
+        <div className="file-mgr">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              saveDoc();
             }}
-            placeholder="untitled-document"
-            required={true}
-          ></input>
-          <button onClick={loadDocs}>
-            <FontAwesomeIcon icon={faFolderOpen} />
-          </button>
-          <button>
-            <FontAwesomeIcon icon={faSave} />
-          </button>
-        </form>
+          >
+            <Tooltip title="Name your document here">
+              <input
+                value={docTitle}
+                onChange={(e) => {
+                  setDocTitle(e.target.value);
+                }}
+                placeholder="untitled-document"
+                required={true}
+              ></input>
+            </Tooltip>
+            <Tooltip title="Create a new document">
+              <button onClick={createNewDoc}>
+                <FontAwesomeIcon icon={faFile} />
+              </button>
+            </Tooltip>
+            <Tooltip title="Open an existing document">
+              <button onClick={loadDocs}>
+                <FontAwesomeIcon icon={faFolderOpen} />
+              </button>
+            </Tooltip>
+            <Tooltip title="Save the current document">
+              <button>
+                <FontAwesomeIcon icon={faSave} />
+              </button>
+            </Tooltip>
+          </form>
 
-        <span className="saveArea" hidden={showSpinner}>
-          <div className="autosave">
-            <p>Autosaving...</p>
-            <FontAwesomeIcon className="fa-spinner" icon={faCircleNotch} />
-          </div>
-        </span>
-        {savedOK && <p className="savedmsg">Saved</p>}
-      </div>
-      <p>
-        {savedAt === undefined
-          ? 'Unsaved'
-          : `Document last saved at: ${savedAt}`}
-      </p>
+          <span className="saveArea" hidden={showSpinner}>
+            <div className="autosave">
+              <p>Autosaving...</p>
+              <FontAwesomeIcon className="fa-spinner" icon={faCircleNotch} />
+            </div>
+          </span>
+          {savedOK && <p className="savedmsg">Saved</p>}
+        </div>
+        <p>
+          {savedAt === undefined
+            ? 'Unsaved'
+            : `Document last saved at: ${savedAt}`}
+        </p>
 
-      <Toolbar toggleHTML={displayHTML} />
-      <div
-        ref={content}
-        className="editor"
-        contentEditable="true"
-        spellCheck="true"
-        onInput={onChange}
-        suppressContentEditableWarning={true}
-      >
-        <p>Start typing here to create your own document.</p>
-      </div>
-      <div hidden={showHTML} className="currentHTML">
-        <h4>Document HTML</h4>
-        {currentHTML}
+        <Toolbar toggleHTML={displayHTML} />
+        <div
+          ref={content}
+          className="editor"
+          contentEditable="true"
+          spellCheck="true"
+          onInput={onChange}
+          suppressContentEditableWarning={true}
+        >
+          <p>Start typing here to create your own document.</p>
+        </div>
+        <div hidden={showHTML} className="currentHTML">
+          <h4>Document HTML</h4>
+          {currentHTML}
+        </div>
       </div>
       <footer>
         <div>
