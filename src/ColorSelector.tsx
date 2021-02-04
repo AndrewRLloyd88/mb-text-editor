@@ -17,6 +17,7 @@ export default function ColorSelector() {
       <input
         type="color"
         id="favcolor"
+        style={{ height: '26px' }}
         name="favcolor"
         value={color}
         onChange={(e) => handleChange(e)}

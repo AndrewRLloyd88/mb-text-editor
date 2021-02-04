@@ -34,7 +34,7 @@ export default function LinkButton(props: Props) {
     document.execCommand(
       'insertHTML',
       false,
-      '<a href="' + url + '" target="_blank">' + selectedText + '</a>'
+      `<a href="${url}" target="_blank" title="Press and hold CTRL to visit ${url}">${selectedText}</a>`
     );
   };
 

@@ -1,6 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Toolbar from './Toolbar';
 import Modal from './Modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import {
+  faCircleNotch,
+  faSave,
+  faFolderOpen,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   name: string;
@@ -13,6 +20,9 @@ const App = (props: Props) => {
   const [savedAt, setSavedAt] = useState<String>();
   const [userDocs, setUserDocs] = useState<String[]>([]);
   const [show, setShow] = useState(true);
+  const [showSpinner, setShowSpinner] = useState(true);
+  const [savedOK, setSavedOK] = useState(false);
+  const [showHTML, setShowHTML] = useState(true);
 
   document.addEventListener(
     'keydown',
@@ -48,7 +58,9 @@ const App = (props: Props) => {
 
   //Save Function
   const saveDoc = () => {
-    console.log(new Date().toString());
+    setSavedOK(true);
+    setShowSpinner(true);
+    displaySaved();
     setSavedAt(new Date().toString());
     localStorage[docTitle] = currentHTML;
   };
@@ -80,6 +92,16 @@ const App = (props: Props) => {
     setShow(!show);
   };
 
+  const displaySaved = () => {
+    setTimeout(() => {
+      setSavedOK(false);
+    }, 3000);
+  };
+
+  const displayHTML = () => {
+    setShowHTML(!showHTML);
+  };
+
   useEffect(() => {
     //does untitiled-document exist in localstorage?
     if (
@@ -95,6 +117,17 @@ const App = (props: Props) => {
       setCurrentHTML(content.current.innerHTML);
     }
   }, [docTitle]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      saveDoc();
+    }, 2000);
+    return () => {
+      setSavedOK(false);
+      setShowSpinner(false);
+      clearTimeout(timer);
+    };
+  }, [currentHTML]);
 
   return (
     <>
@@ -123,16 +156,29 @@ const App = (props: Props) => {
             placeholder="untitled-document"
             required={true}
           ></input>
-          <button>Save</button>
+          <button onClick={loadDocs}>
+            <FontAwesomeIcon icon={faFolderOpen} />
+          </button>
+          <button>
+            <FontAwesomeIcon icon={faSave} />
+          </button>
         </form>
-        <button onClick={loadDocs}>Load</button>
+
+        <span className="saveArea" hidden={showSpinner}>
+          <div className="autosave">
+            <p>Autosaving...</p>
+            <FontAwesomeIcon className="fa-spinner" icon={faCircleNotch} />
+          </div>
+        </span>
+        {savedOK && <p className="savedmsg">Saved</p>}
       </div>
       <p>
         {savedAt === undefined
           ? 'Unsaved'
           : `Document last saved at: ${savedAt}`}
       </p>
-      <Toolbar />
+
+      <Toolbar toggleHTML={displayHTML} />
       <div
         ref={content}
         className="editor"
@@ -143,7 +189,16 @@ const App = (props: Props) => {
       >
         <p>Start typing here to create your own document.</p>
       </div>
-      <div>{currentHTML}</div>
+      <div hidden={showHTML} className="currentHTML">
+        <h4>Document HTML</h4>
+        {currentHTML}
+      </div>
+      <footer>
+        <div>
+          Created by
+          <a href="https://www.linkedin.com/in/andrewlloyd01/"> Andrew Lloyd</a>
+        </div>
+      </footer>
     </>
   );
 };
